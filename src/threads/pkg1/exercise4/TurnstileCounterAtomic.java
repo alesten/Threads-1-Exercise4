@@ -1,15 +1,17 @@
 package threads.pkg1.exercise4;
 
-public class TurnstileCounterAtomic {
+import java.util.concurrent.atomic.AtomicInteger;
 
-  static final long DELAY_VAL = 10000;
-  long count = 0;
+public class TurnstileCounterAtomic{
 
-  public long getValue() {
-    return count;
-  }
+    static final long DELAY_VAL = 10000;
+    AtomicInteger count = new AtomicInteger(0);
 
-  public void incr() {
+    public AtomicInteger getValue() {
+        return count;
+    }
+
+    public void incr() {
 //   If the program initially does not fail, replace the count line with the lines below
 //    long n = count;
 //    //Spend some time to force preemtion
@@ -17,6 +19,6 @@ public class TurnstileCounterAtomic {
 //    n = n + 1;
 //    count = n;
 
-    count++;
-  }
+        count.addAndGet(1);
+    }
 }

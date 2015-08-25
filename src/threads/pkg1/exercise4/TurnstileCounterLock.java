@@ -1,6 +1,6 @@
 package threads.pkg1.exercise4;
 
-public class TurnstileCounter {
+public class TurnstileCounterLock {
 
   static final long DELAY_VAL = 10000;
   long count = 0;
