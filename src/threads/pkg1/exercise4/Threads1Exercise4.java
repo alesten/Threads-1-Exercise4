@@ -11,7 +11,7 @@ public class Threads1Exercise4 {
 
   public static void main(String[] args) throws InterruptedException {
     //This is the shared Counter used by all turnstilles
-    TurnstileCounter sharedCounter = new TurnstileCounter();
+    TurnstileCounterAtomic sharedCounter = new TurnstileCounterAtomic();
     
     
     for (int i = 0; i < NUMBER_OF_TURNSTILES; i++) {
