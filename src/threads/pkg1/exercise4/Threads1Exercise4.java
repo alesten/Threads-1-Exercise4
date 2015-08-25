@@ -1,21 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package threads.pkg1.exercise4;
 
-/**
- *
- * @author AlexanderSteen
- */
-public class Threads1Exercise4 {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+
+public class Threads1Exercise4 {
+ static final int NUMBER_OF_TURNSTILES = 40;
+  static Turnstile[] turnStiles = new Turnstile[NUMBER_OF_TURNSTILES];
+
+  public static void main(String[] args) throws InterruptedException {
+    //This is the shared Counter used by all turnstilles
+    TurnstileCounter sharedCounter = new TurnstileCounter();
+    
+    
+    for (int i = 0; i < NUMBER_OF_TURNSTILES; i++) {
+      turnStiles[i] = new Turnstile(sharedCounter);
     }
     
+    
+    //This example uses a ThreadPool to handle threads
+    
+    ExecutorService es=Executors.newCachedThreadPool();
+   
+    for (int i = 0; i < NUMBER_OF_TURNSTILES; i++) {
+      es.execute(turnStiles[i]);
+    }
+    
+    es.shutdown();
+    es.awaitTermination(10, TimeUnit.SECONDS);
+    
+    System.out.println("All turnstiles are done");
+    //Print the updated value
+    System.out.println(sharedCounter.getValue());
+  }  
 }
