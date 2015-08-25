@@ -17,12 +17,10 @@ public class Turnstile implements Runnable {
 
     @Override
     public void run() {
-        //synchronized (counter) {
-            for (int i = 0; i < COUNT_MAX; i++) {
-                counter.incr();
-                count++;
-            }
-        //}
+        for (int i = 0; i < COUNT_MAX; i++) {
+            counter.incr();
+            count++;
+        }
     }
 
 }
