@@ -2,12 +2,12 @@ package threads.pkg1.exercise4;
 
 public class Turnstile implements Runnable {
 
-    private final TurnstileCounterAtomic counter;
+    private final TurnstileCounterLock counter;
     private int count;
 
     final int COUNT_MAX = 1000;
 
-    Turnstile(TurnstileCounterAtomic c) {
+    Turnstile(TurnstileCounterLock c) {
         counter = c;
     }
 
@@ -17,12 +17,12 @@ public class Turnstile implements Runnable {
 
     @Override
     public void run() {
-        synchronized (counter) {
+        //synchronized (counter) {
             for (int i = 0; i < COUNT_MAX; i++) {
                 counter.incr();
                 count++;
             }
-        }
+        //}
     }
 
 }
